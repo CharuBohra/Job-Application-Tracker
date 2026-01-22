@@ -10,7 +10,7 @@ Job Application Tracker is a modern dashboard-style web application that helps u
 - Responsive and modern UI with Tailwind CSS
 - Clean component-based architecture
 
-##✅ Tech Stack
+## ✅ Tech Stack
 - React.js
 - JavaScript (ES6+)
 - Tailwind CSS
