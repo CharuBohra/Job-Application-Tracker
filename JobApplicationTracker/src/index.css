@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+/* ===== Theme Variables ===== */
+:root {
+  /* Fonts */
+  --font-display: 'Open Sans', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+
+  /* Font Sizes */
+  --text-14: 14px;
+
+  /* Background Colors */
+  --main-bg: #FAFBFB;
+  --main-dark-bg: #20232A;
+  --secondary-dark-bg: #33373E;
+  --light-gray: #F7F7F7;
+  --half-transparent: rgba(0, 0, 0, 0.5);
+  --sidebar-bg: #878282;
+
+  /* Border */
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-width-1: 1px;
+
+  /* Widths */
+  --w-400: 400px;
+  --w-760: 760px;
+  --w-780: 780px;
+  --w-800: 800px;
+  --w-1000: 1000px;
+  --w-1200: 1200px;
+  --w-1400: 1400px;
+
+  /* Heights */
+  --h-80: 80px;
+  --min-h-590: 590px;
+}
+
+/* ===== Global Defaults ===== */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--main-bg);
+  color: #1e293b;
+}
+
+/* ===== Font Utilities ===== */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.text-14 {
+  font-size: var(--text-14);
+}
+
+/* ===== Background Utilities ===== */
+.bg-main-bg {
+  background-color: var(--main-bg);
+}
+
+.bg-main-dark-bg {
+  background-color: var(--main-dark-bg);
+}
+
+.bg-secondary-dark-bg {
+  background-color: var(--secondary-dark-bg);
+}
+
+.bg-light-gray {
+  background-color: var(--light-gray);
+}
+
+.bg-half-transparent {
+  background-color: var(--half-transparent);
+}
+
+.bg-sidebar-bg{
+  background-color: var(--sidebar-bg);
+}
+
+/* ===== Border Utilities ===== */
+.border {
+  border-style: solid;
+}
+
+.border-1 {
+  border-width: var(--border-width-1);
+}
+
+.border-color {
+  border-color: var(--border-color);
+}
+
+/* ===== Width Utilities ===== */
+.w-400 { width: var(--w-400); }
+.w-760 { width: var(--w-760); }
+.w-780 { width: var(--w-780); }
+.w-800 { width: var(--w-800); }
+.w-1000 { width: var(--w-1000); }
+.w-1200 { width: var(--w-1200); }
+.w-1400 { width: var(--w-1400); }
+
+/* ===== Height Utilities ===== */
+.h-80 {
+  height: var(--h-80);
+}
+
+.min-h-590 {
+  min-height: var(--min-h-590);
+}
+
+/* ===== Background Image ===== */
+.bg-hero-pattern {
+  background-image: url('/src/data/welcome-bg.svg');
+  background-size: cover;
+  background-position: center;
+}
