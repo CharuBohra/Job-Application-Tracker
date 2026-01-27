@@ -4,8 +4,8 @@ import StatusCard from '../components/StatusCard';
 
 function Dashboard() {
   return (
-    <div className='px-6 bg-light-gray dark:bg-secondary-dark-bg min-h-screen'>
-        <div className='flex flex-wrap gap-6 justify-items-start'>
+    <div className='pt-4 px-6 bg-light-gray min-h-screen'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-start'>
             {statusCard.map((item)=>(
                 <StatusCard
                     key={item.id}

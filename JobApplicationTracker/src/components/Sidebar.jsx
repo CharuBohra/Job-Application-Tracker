@@ -5,14 +5,14 @@ import {HiClipboardList} from 'react-icons/hi'
 
 function Sidebar() {
   return (
-    <div className='ml-3 h-screen overflow-auto pb-10 bg-main-bg'>
+    <div className='ml-3 h-screen overflow-auto bg-main-bg'>
         <div className='flex items-center px-4 mt-4'>
             <Link to="/" className='flex justify-center items-center gap-2'>
                 <MdWork className='text-2xl text-slate-700 rounded-full'/>
                 <h1 className='text-2xl font-semibold text-gray-600 tracking-tight'>TrackHire</h1>
             </Link>
         </div>
-        <div className='mt-6 flex flex-col border-t border-gray-200 pt-4'>
+        <div className='mt-4 flex flex-col border-t border-gray-200 pt-4'>
             <NavLink
                  to="/dashboard" 
                 className={({isActive})=> isActive ? 
