@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { FaPencilAlt } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 const statusColors = {
   Applied: "bg-blue-100 text-blue-700",
   Interview: "bg-yellow-100 text-yellow-700",
@@ -7,7 +8,7 @@ const statusColors = {
   Rejected: "bg-red-100 text-red-700",
 };
 
-function ApplicationsTable({data}) {
+function ApplicationsTable({data,onEdit,onDelete,showActions=false}) {
     
   return (
     <div className='overflow-hidden'>
@@ -18,6 +19,11 @@ function ApplicationsTable({data}) {
             <th className='px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 border-r border-gray-100 last:border-r-0'>Position</th>
             <th className='px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 border-r border-gray-100 last:border-r-0'>Status</th>
             <th className='px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 border-r border-gray-100 last:border-r-0'>Date Applied</th>
+            {showActions && 
+               <th className='px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500'>
+                   Actions
+              </th>
+            }
           </tr>
         </thead>
         <tbody className='text-gray-700 '>
@@ -31,6 +37,24 @@ function ApplicationsTable({data}) {
                 </span>
             </td>
               <td className='px-6 py-4 border-r border-gray-100 last:border-r-0'>{application.dateApplied}</td>
+              {showActions && 
+                 <td className='px-6 py-4 flex space-x-2'>
+                     <button
+                          className='p-2 bg-yellow-100 text-yellow-700  rounded-md hover:bg-yellow-200 transition'
+                          onClick={() => onEdit(application)}
+                          title='Edit Application'
+                      >
+                        <FaPencilAlt />
+                      </button>
+                     <button
+                          className='p-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition'  
+                          onClick={() => onDelete(application)}
+                          title='Delete Application'
+                      >
+                        <MdDelete />
+                      </button>
+                  </td>
+              }
             </tr>
           ))}
         </tbody>
