@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { applicationsData } from '../data/applicationsData'
 import ApplicationsTable from '../components/ApplicationsTable'
 import ApplicationModal from '../components/ApplicationModal';
+import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 
 function Applications() {
   const [applications,setApplications] = useState(applicationsData);
@@ -17,9 +18,14 @@ function Applications() {
     setIsModalOpen(true);
   }
 
+  const confirmDelete = () => {
+    setApplications(applications.filter(app => app.id !== applicationToDelete.id));
+    setIsConfirmOpen(false);
+    setApplicationToDelete(null);
+  }
   const handleDelete = (application) => {
-    setApplicationToDelete(application);
     setIsConfirmOpen(true);
+    setApplicationToDelete(application);
   }
 
   const handleSave = (formData) => {
@@ -68,6 +74,14 @@ function Applications() {
           onClose={() => setIsModalOpen(false)}
           initialData={isEditMode ? selectedApplication : null}
           onSave={handleSave}
+      />
+      <ConfirmDeleteModal
+          isOpen={isConfirmOpen}
+          application={applicationToDelete}
+          onCancel={() => {
+            setIsConfirmOpen(false);
+          }}
+          onConfirm={confirmDelete}
       />
     </div>
   )

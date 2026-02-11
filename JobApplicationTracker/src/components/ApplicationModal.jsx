@@ -18,7 +18,7 @@ function ApplicationModal({ isOpen, onClose,initialData,onSave}) {
 
   return (
     <div>
-        <div className='fixed inset-0 bg-black bg-opacity-200 flex items-center justify-center z-50'>
+        <div className='fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50'>
             <div className='bg-white rounded-xl shadow-xl w-[420px] p-6'>
                 <h2 className='text-xl font-semibold mb-5 text-slate-800'>
                     {initialData ? 'Edit Application' : 'Add Application'}
@@ -55,12 +55,12 @@ function ApplicationModal({ isOpen, onClose,initialData,onSave}) {
                     </select>
                 </div>
                 <div className='mb-4'>
-                    <label className='block text-sm font-medium text-gray-700 mb-1'>Date Applied:</label>
+                    <label className='block text-sm font-medium text-gray-800 mb-1'>Date Applied:</label>
                     <input
                        type='date'
                        className='w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
                        value={formData.dateApplied}
-                          onChange={(e) => setFormData({...formData, dateApplied: e.target.value})}
+                       onChange={(e) => setFormData({...formData, dateApplied: e.target.value})}
                    />
                 </div>
                 <div className='flex gap-3 mt-4 justify-end'>
