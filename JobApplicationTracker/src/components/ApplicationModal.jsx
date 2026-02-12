@@ -1,20 +1,27 @@
 import React from 'react'
-import { useState } from 'react'
-import { FaPencilAlt } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
-
+import { useState,useEffect } from 'react'
 
 function ApplicationModal({ isOpen, onClose,initialData,onSave}) {
  const [formData,setFormData] =useState({
-    company: initialData ? initialData.company : '',
-    position: initialData ? initialData.position : '',
-    status: initialData ? initialData.status : 'Applied',
-    dateApplied: initialData ? initialData.dateApplied : '',
+    company: '',
+    position:'',
+    status:'Applied',
+    dateApplied: '',
  });
 
+ useEffect(() => {
+  if (initialData) {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFormData({
+      company: initialData.company,
+      position: initialData.position,
+      status: initialData.status,
+      dateApplied: initialData.dateApplied,
+    });
+  }
+}, [initialData]);
 
   if(!isOpen) return null;
-
 
   return (
     <div>

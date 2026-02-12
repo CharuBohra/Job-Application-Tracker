@@ -7,7 +7,8 @@ import { MdOutlineCancel } from 'react-icons/md';
 export const statusCard = [
 {
     id: 1,
-    title: 'Total Applied',
+    title: 'Applied',
+    status: 'Applied',
     count: 24,
     icon: <FaSuitcase />,
     iconBgColor: 'bg-blue-100',
@@ -16,6 +17,7 @@ export const statusCard = [
 {
     id: 2,
     title: 'Interviews',
+    status: 'Interview',
     count: 8,
     icon: <MdOutlineTimer />,
     iconBgColor: 'bg-yellow-100',
@@ -24,6 +26,7 @@ export const statusCard = [
 {
     id: 3,
     title: 'Offers',
+    status: 'Offer',
     count: 3,
     icon: <LuCircleCheckBig />,
     iconBgColor: 'bg-green-100',
@@ -32,6 +35,7 @@ export const statusCard = [
 {
     id: 4,
     title: 'Rejected',
+    status: 'Rejected',
     count: 5,
     icon: <MdOutlineCancel />,
     iconBgColor: 'bg-red-100',
