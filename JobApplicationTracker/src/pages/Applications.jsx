@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { applicationsData } from '../data/applicationsData'
+import React, { useState } from 'react'
 import ApplicationsTable from '../components/ApplicationsTable'
 import ApplicationModal from '../components/ApplicationModal';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import {IoMdSearch} from 'react-icons/io'
+import { useApplicationContext } from '../contexts/ApplicationContext';
 
 function Applications() {
-  const [applications,setApplications] = useState(()=>{
-    const storedData = localStorage.getItem('applications');
-    return storedData ? JSON.parse(storedData) : applicationsData;
-  });
+  const {applications,addApplication,editApplication,deleteApplication,sortedApplications} = useApplicationContext();
+
   const [isModalOpen,setIsModalOpen] = useState(false);
   const [selectedApplication,setSelectedApplication] = useState(null);
   const [isConfirmOpen,setIsConfirmOpen] = useState(false);
   const [applicationToDelete,setApplicationToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
-
-  const sortedApplications = [...applications].sort((a, b) => new Date(b.dateApplied) - new Date(a.dateApplied));
 
   const processedApplications = sortedApplications
   .filter(app => 
@@ -26,8 +22,7 @@ function Applications() {
   .filter(app =>
       app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.position.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  .sort((a, b) => new Date(b.dateApplied) - new Date(a.dateApplied));
+  );
 
   const handleEdit = (application) => {
     setSelectedApplication(application);
@@ -35,7 +30,7 @@ function Applications() {
   }
 
   const confirmDelete = () => {
-    setApplications(applications.filter(app => app.id !== applicationToDelete.id));
+    deleteApplication(applicationToDelete.id);
     setIsConfirmOpen(false);
     setApplicationToDelete(null);
   }
@@ -44,20 +39,10 @@ function Applications() {
     setApplicationToDelete(application);
   }
 
-  useEffect(() => {
-    localStorage.setItem('applications', JSON.stringify(applications));
-  }, [applications]);
-
  const handleSave = (formData) => {
   if (selectedApplication) {
     // EDIT
-    setApplications(
-      applications.map(app =>
-        app.id === selectedApplication.id
-          ? { ...app, ...formData }
-          : app
-      )
-    );
+    editApplication({ ...selectedApplication, ...formData });
   } else {
      const newApplication = {
       id: applications.length
@@ -66,7 +51,7 @@ function Applications() {
       ...formData,
     };
 
-    setApplications([...applications, newApplication]);
+    addApplication(newApplication);
   }
 
   setIsModalOpen(false);
