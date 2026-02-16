@@ -1,7 +1,7 @@
 import React from 'react'
 import { statusCard } from '../data/dummy';
 import StatusCard from '../components/StatusCard';
-import { useApplicationContext } from '../contexts/ApplicationContext';
+import { useApplicationContext } from '../contexts/useApplicationContext';
 import ApplicationsTable from '../components/ApplicationsTable';
 import { Link } from 'react-router-dom';
 

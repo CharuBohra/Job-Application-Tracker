@@ -3,10 +3,11 @@ import ApplicationsTable from '../components/ApplicationsTable'
 import ApplicationModal from '../components/ApplicationModal';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import {IoMdSearch} from 'react-icons/io'
-import { useApplicationContext } from '../contexts/ApplicationContext';
+import { useApplicationContext } from '../contexts/useApplicationContext';
+import Pagination from '../components/Pagination';
 
 function Applications() {
-  const {applications,addApplication,editApplication,deleteApplication,sortedApplications} = useApplicationContext();
+  const {addApplication,editApplication,deleteApplication,sortedApplications} = useApplicationContext();
 
   const [isModalOpen,setIsModalOpen] = useState(false);
   const [selectedApplication,setSelectedApplication] = useState(null);
@@ -14,6 +15,8 @@ function Applications() {
   const [applicationToDelete,setApplicationToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
+  const [currentPage,setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   const processedApplications = sortedApplications
   .filter(app => 
@@ -23,6 +26,11 @@ function Applications() {
       app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.position.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const totalItems = processedApplications.length;
+  const totalPages = Math.ceil(totalItems/itemsPerPage);
+  const startIndex = (currentPage-1)*itemsPerPage;
+  const paginatedApplications = processedApplications.slice(startIndex,startIndex+itemsPerPage);
 
   const handleEdit = (application) => {
     setSelectedApplication(application);
@@ -44,14 +52,7 @@ function Applications() {
     // EDIT
     editApplication({ ...selectedApplication, ...formData });
   } else {
-     const newApplication = {
-      id: applications.length
-        ? Math.max(...applications.map(a => a.id)) + 1
-        : 1,
-      ...formData,
-    };
-
-    addApplication(newApplication);
+    addApplication(formData);
   }
 
   setIsModalOpen(false);
@@ -98,12 +99,17 @@ function Applications() {
         </div>
         <div className='mt-4 bg-white rounded-lg shadow-sm'>
           <ApplicationsTable
-              data={processedApplications} 
+              data={paginatedApplications} 
               onEdit={handleEdit}
               onDelete={handleDelete}
               showActions
           />
         </div>
+        <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
       </div>
       <ApplicationModal
           key={selectedApplication?.id || "new"}
